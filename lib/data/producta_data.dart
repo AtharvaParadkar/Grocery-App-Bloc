@@ -1,4 +1,4 @@
-class ProductaData {
+class ProductsData {
   static List<Map<String, dynamic>> groceryProducts = [
     {
       'id': 01,
