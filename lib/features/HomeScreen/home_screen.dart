@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:grocery_app_bloc/features/HomeScreen/bloc/home_screen_bloc.dart';
+import 'package:grocery_app_bloc/features/HomeScreen/product_widget.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -43,32 +44,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 centerTitle: true,
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
                 scrolledUnderElevation: 0,
+                actions: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.favorite_border),
+                  ),
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(Icons.shopping_cart_outlined),
+                  ),
+                ],
               ),
               body: Padding(
                 padding: const EdgeInsets.all(8),
                 child: ListView.builder(
                   itemCount: successState.products.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      title: Text(
-                        successState.products[index].name,
-                        style: const TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 18),
-                      ),
-                      subtitle: Text(
-                        successState.products[index].description,
-                        style: const TextStyle(fontSize: 14),
-                      ),
-                      leading: Image.network(
-                        successState.products[index].imageUrl,
-                        height: 50,
-                        width: 70,
-                        fit: BoxFit.cover,
-                      ),
-                      trailing: Text(
-                        '\u{20B9} ${successState.products[index].price}',
-                        style: const TextStyle(fontSize: 16),
-                      ),
+                    return ProductWidget(
+                      productDataModel: successState.products.elementAt(index),
+                      homeScreenBloc: homeScreenBloc,
                     );
                   },
                 ),
