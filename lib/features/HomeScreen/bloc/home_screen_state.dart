@@ -18,3 +18,14 @@ class HomeScreenErrorState extends HomeScreenState {
 
   HomeScreenErrorState(this.errorMessage);
 }
+
+sealed class HomeScreenActionsState extends HomeScreenState {}
+
+class HomeScreenNavigateToWishlistPageActionState
+    extends HomeScreenActionsState {}
+
+class HomeScreenItemAddedToWishlistMsg extends HomeScreenActionsState {
+  final String msg;
+
+  HomeScreenItemAddedToWishlistMsg(this.msg);
+}

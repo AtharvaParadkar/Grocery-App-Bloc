@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app_bloc/features/HomeScreen/bloc/home_screen_bloc.dart';
 import 'package:grocery_app_bloc/features/HomeScreen/models/product_data_model.dart';
-import 'package:grocery_app_bloc/features/HomeScreen/product_detail.dart';
+import 'package:grocery_app_bloc/features/HomeScreen/UI/product_detail.dart';
+import 'package:grocery_app_bloc/features/Wishlist/bloc/wishlist_bloc.dart';
 
 class ProductWidget extends StatelessWidget {
   const ProductWidget(
-      {super.key, required this.productDataModel, this.homeScreenBloc});
+      {super.key,
+      required this.productDataModel,
+      this.homeScreenBloc,
+      this.wishlistBloc});
 
   final ProductDataModel productDataModel;
   final HomeScreenBloc? homeScreenBloc;
+  final WishlistBloc? wishlistBloc;
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +50,8 @@ class ProductWidget extends StatelessWidget {
             // Stack(
             //   children: [
             Hero(
-              tag: productDataModel.id,transitionOnUserGestures: true,
+              tag: productDataModel.id,
+              transitionOnUserGestures: true,
               child: Container(
                 clipBehavior: Clip.hardEdge,
                 decoration: BoxDecoration(
@@ -101,26 +107,51 @@ class ProductWidget extends StatelessWidget {
                         fontSize: 14, fontWeight: FontWeight.w400),
                   ),
                   const SizedBox(height: 5),
-                  Row(
-                    children: [
-                      Text(
-                        '\u{20B9} ${productDataModel.price}',
-                        style: const TextStyle(
-                            fontSize: 16, fontWeight: FontWeight.w500),
-                      ),
-                      const Spacer(),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.favorite_border),
-                        color: Colors.orangeAccent,
-                      ),
-                      IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.shopping_cart_outlined),
-                        color: Colors.deepOrangeAccent,
-                      ),
-                    ],
-                  ),
+                  if (wishlistBloc == null)
+                    Row(
+                      children: [
+                        Text(
+                          '\u{20B9} ${productDataModel.price}',
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            homeScreenBloc?.add(HomeScreenWishlistClickedEvent(
+                                productDataModel));
+                          },
+                          icon: const Icon(Icons.favorite_border),
+                          color: Colors.orangeAccent,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.shopping_cart_outlined),
+                          color: Colors.deepOrangeAccent,
+                        ),
+                      ],
+                    )
+                  else if (homeScreenBloc == null)
+                    Row(
+                      children: [
+                        Text(
+                          '\u{20B9} ${productDataModel.price}',
+                          style: const TextStyle(
+                              fontSize: 16, fontWeight: FontWeight.w500),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.shopping_cart_outlined),
+                          color: Colors.orangeAccent,
+                        ),
+                        IconButton(
+                          onPressed: () {},
+                          icon: const Icon(Icons.delete),
+                          color: Colors.deepOrangeAccent,
+                        ),
+                      ],
+                    ),
                 ],
               ),
             ),

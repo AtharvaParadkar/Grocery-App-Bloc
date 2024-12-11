@@ -13,7 +13,7 @@ class ProductDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Grocery'),
+        title: Text(homeScreenBloc != null?'Grocery':'Wishlist'),
         centerTitle: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         scrolledUnderElevation: 0,
@@ -73,7 +73,7 @@ class ProductDetail extends StatelessWidget {
             Text(
               productDataModel.detailDescription,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),
+              style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w400),
             ),
             const SizedBox(height: 25),
             ElevatedButton(
