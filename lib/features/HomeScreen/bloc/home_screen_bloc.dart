@@ -30,6 +30,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
                   id: p['id'],
                   name: p['name'],
                   description: p['description'],
+                  detailDescription: p['detailDescription'],
                   price: p['price'],
                   imageUrl: p['imageUrl'],
                 ),
