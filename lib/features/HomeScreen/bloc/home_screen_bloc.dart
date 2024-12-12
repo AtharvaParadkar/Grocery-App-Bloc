@@ -48,14 +48,17 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
 
   FutureOr<void> homeScreenWishlistClickedEvent(
       HomeScreenWishlistClickedEvent event, Emitter<HomeScreenState> emit) {
-    // if (!wishlist.any((product) => product.id == event.productDataModel.id)) {}
+    if (WishlistItems().isInWishlist(event.productDataModel)) {
+      emit(HomeScreenItemAddedToWishlistMsg(
+          '${event.productDataModel.name} is already in wishlist'));
+    } else {
+      WishlistItems().addWishlist(event.productDataModel);
 
-    WishlistItems().addWishlist(event.productDataModel);
-
-    emit(
-      HomeScreenItemAddedToWishlistMsg(
-          '${event.productDataModel.name} added to wishlist'),
-    );
+      emit(
+        HomeScreenItemAddedToWishlistMsg(
+            '${event.productDataModel.name} added to wishlist'),
+      );
+    }
   }
 
   FutureOr<void> homeScreenWishlistNavigateEvent(
