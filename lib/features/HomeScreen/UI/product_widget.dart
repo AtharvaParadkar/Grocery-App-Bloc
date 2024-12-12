@@ -146,7 +146,9 @@ class ProductWidget extends StatelessWidget {
                           color: Colors.orangeAccent,
                         ),
                         IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            wishlistBloc?.add(WishlistRemoveEvent(productDataModel));
+                          },
                           icon: const Icon(Icons.delete),
                           color: Colors.deepOrangeAccent,
                         ),

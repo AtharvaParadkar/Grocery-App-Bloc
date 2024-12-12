@@ -13,7 +13,7 @@ class ProductDetail extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(homeScreenBloc != null?'Grocery':'Wishlist'),
+        title: Text(productDataModel.name),
         centerTitle: true,
         backgroundColor: Theme.of(context).scaffoldBackgroundColor,
         scrolledUnderElevation: 0,
