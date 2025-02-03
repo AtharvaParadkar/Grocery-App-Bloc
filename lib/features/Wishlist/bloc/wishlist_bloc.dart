@@ -19,7 +19,7 @@ class WishlistBloc extends Bloc<WishlistEvent, WishlistState> {
       WishlistInitialEvent event, Emitter<WishlistState> emit) async {
     emit(WishlistLoadingState());
 
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 1));
 
     try {
       emit(WishlistLoadedSuccessState(

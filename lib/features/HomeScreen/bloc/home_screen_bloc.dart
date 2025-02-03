@@ -23,7 +23,7 @@ class HomeScreenBloc extends Bloc<HomeScreenEvent, HomeScreenState> {
       HomeScreenInitialEvent event, Emitter<HomeScreenState> emit) async {
     try {
       emit(HomeScreenLoadingState());
-      await Future.delayed(const Duration(seconds: 4));
+      await Future.delayed(const Duration(seconds: 2));
       // print('ProductsData: ${ProductsData.groceryProducts}');
       emit(
         HomeScreenLoadedSuccessState(
